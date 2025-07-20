@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>rock paper scissors</title>
+    <style>
+      .rpsb{
+        border: solid 4px hsl(0,0%,95%);
+        background-color: hsl(0,0%,5%);
+        border-radius: 200px;
+        padding: 24px;
+      }
+      .rpsp{
+        width: 40px ;
+        
+      }
+      body{
+        background-color: hsl(0,0%,5%);
+        color: hsl(0,0%,95%);
+      }
+      .js-result{
+        font-weight: bold;
+        
+      }
+      .moveEmoji{
+        width: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Rock Paper Scissors</h1>
+    <button class="rpsb" onclick="play('rock');"><img class="rpsp" src="photos/rock.png"></button>
+    <button class="rpsb" onclick="play('paper');"><img class="rpsp" src="photos/paper.png"></button>
+    <button class="rpsb" onclick="play('scissors');"><img class="rpsp" src="photos/scissors.png"></button>
+    <h3 class="js-result"></h3>
+    <h3 class="js-move">
+      You
+      <img src="photos/rock.png" alt="" class="moveEmoji">
+      <img src="photos/rock.png" alt="" class="moveEmoji">
+      Computer
+    </h3>
+    <h4 class="js-score">Score</h4>
+    <button onclick="resetScore();">reset score</button>
+    
+    <script>
+      let score = JSON.parse(localStorage.getItem('score')) 
+      if (!score){
+        score = {
+          wins : 0 ,
+          losses : 0 ,
+          ties : 0
+        }
+      }
+      function scoreP (scorePa) {
+        scorePa.innerHTML = `wins: ${score.wins}, loses: ${score.losses}, ties: ${score.ties}.`;
+      }
+      let jresult = document.querySelector('.js-result');
+      let jmove = document.querySelector('.js-move');
+      
+      scoreP(document.querySelector('.js-score'));
+      function resetScore(){
+        score.wins = 0;
+        score.losses = 0;
+        score.ties = 0;
+        localStorage.removeItem('score');
+        scoreP(document.querySelector('.js-score'));
+        jresult.innerHTML = 'reset score';
+        jmove.innerHTML = '';
+        //alert('score reset.');
+      }
+      function sellectAiMove(){
+        let aiMove = Math.random();
+        if (aiMove <= 1/3){
+          aiMove = 'rock';
+        } else if(aiMove <= 2/3){
+          aiMove = 'paper';
+        }else{
+          aiMove = 'scissors';
+        }
+        return aiMove;
+      }
+      function play(rps){
+        function move() {
+          jresult.innerHTML = result;
+          jmove.innerHTML= `You
+      <img src="photos/${rps}.png" alt="" class="moveEmoji">
+      <img src="photos/${aiMove}.png" alt="" class="moveEmoji">
+      Computer`;
+        }
+        let aiMove = sellectAiMove();
+        let result;
+        if (rps === 'rock'){
+          if(aiMove === 'rock'){
+            result = 'tie';
+            score.ties += 1;
+          }else if(aiMove === 'paper') {
+            result = 'you lose';
+            score.losses += 1;
+          }else{
+            result = 'you win';
+            score.wins+= 1;
+          }
+          
+        }else if(rps === 'paper'){
+          if(aiMove === 'rock'){
+            result = 'you win';
+            score.wins += 1;
+          }else if(aiMove === 'paper') {
+            result = 'tie';
+            score.ties += 1;
+          }else{
+            result = 'you lose';
+            score.losses += 1;
+          }
+          
+        }else{
+          if(aiMove === 'rock'){
+            result = 'you lose';
+            score.losses += 1;
+          }else if(aiMove === 'paper') {
+            result = 'you win';
+            score.wins += 1;
+          }else{
+            result = 'tie';
+            score.ties += 1;
+          }
+          
+        }
+        localStorage.setItem('score',JSON.stringify(score));
+        scoreP(document.querySelector('.js-score'));
+        move();
+        /*alert(`you picked ${rps}, computer picked ${aiMove}, ${result}.\n wins: ${score.wins}, loses: ${score.losses}, ties: ${score.ties}.`);
+        */
+        
+      }
+    </script>
+  </body>
+</html>
