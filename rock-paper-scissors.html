@@ -28,14 +28,14 @@
   </head>
   <body>
     <h1>Rock Paper Scissors</h1>
-    <button class="rpsb" onclick="play('rock');"><img class="rpsp" src="photos/rock.png"></button>
-    <button class="rpsb" onclick="play('paper');"><img class="rpsp" src="photos/paper.png"></button>
-    <button class="rpsb" onclick="play('scissors');"><img class="rpsp" src="photos/scissors.png"></button>
+    <button class="rpsb" onclick="play('rock');"><img class="rpsp" src="rock.png"></button>
+    <button class="rpsb" onclick="play('paper');"><img class="rpsp" src="paper.png"></button>
+    <button class="rpsb" onclick="play('scissors');"><img class="rpsp" src="scissors.png"></button>
     <h3 class="js-result"></h3>
     <h3 class="js-move">
       You
-      <img src="photos/rock.png" alt="" class="moveEmoji">
-      <img src="photos/rock.png" alt="" class="moveEmoji">
+      <img src="" alt="" class="moveEmoji">
+      <img src="" alt="" class="moveEmoji">
       Computer
     </h3>
     <h4 class="js-score">Score</h4>
@@ -82,8 +82,8 @@
         function move() {
           jresult.innerHTML = result;
           jmove.innerHTML= `You
-      <img src="photos/${rps}.png" alt="" class="moveEmoji">
-      <img src="photos/${aiMove}.png" alt="" class="moveEmoji">
+      <img src="${rps}.png" alt="" class="moveEmoji">
+      <img src="${aiMove}.png" alt="" class="moveEmoji">
       Computer`;
         }
         let aiMove = sellectAiMove();
