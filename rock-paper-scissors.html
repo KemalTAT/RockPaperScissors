@@ -39,6 +39,7 @@
       Computer
     </h3>
     <h4 class="js-score">Score</h4>
+    <h3 class="js-percentage"></h3>
     <button onclick="resetScore();">reset score</button>
     
     <script>
@@ -48,6 +49,25 @@
           wins : 0 ,
           losses : 0 ,
           ties : 0
+        }
+      }
+      let intervalid;
+      let autoPB = document.querySelector('.js-autoPlay');
+      let perc = document.querySelector('.js-percentage');
+      function wltper(wlt){
+        let x = '%'+ (Math.round((wlt/ (score.ties + score.losses + score.ties)) * 100));
+        return x;
+      }
+      function autoPlay(){
+        if (autoPB.innerHTML === "Auto Play"){
+          intervalid = setInterval(function(){
+            let nonPlayerComputerMove = sellectAiMove();
+            play(nonPlayerComputerMove);
+          },1)
+          autoPB.innerHTML = 'Auto Playing';
+        }else {
+          clearInterval(intervalid);
+          autoPB.innerHTML = 'Auto Play';
         }
       }
       function scoreP (scorePa) {
@@ -130,7 +150,10 @@
         move();
         /*alert(`you picked ${rps}, computer picked ${aiMove}, ${result}.\n wins: ${score.wins}, loses: ${score.losses}, ties: ${score.ties}.`);
         */
-        
+        let w = wltper(score.wins);
+        let l = wltper(score.losses);
+        let t = wltper(score.ties);
+        perc.innerHTML = `<p>win percentage: ${w}</p><p>lose percentage: ${l}</p><p>tie percentage: ${t}</p>`;
       }
     </script>
   </body>
