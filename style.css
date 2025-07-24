@@ -1,0 +1,53 @@
+.rock, 
+.paper,
+.scissors{
+  padding: 3vw;
+  border: solid hsl(0, 0%, 95%) 1vw;
+  background-color: hsl(0, 0%, 5%);
+  border-radius: 15vw;
+}
+.rps{
+  width: 16vw;
+}
+.main {
+  display: grid;
+  grid-template-columns: 80vw;
+  width: 80vw;
+  margin: 0vw 10vw
+}
+div{
+  width: 100%;
+}
+body{
+  background-color: hsl(0, 0%, 5%);
+  color: hsl(0, 0%, 95%);
+}
+
+h1{
+  font-size: 2rem;
+}
+h3{
+  font-size: 1.5rem;
+}
+h4{
+  font-size: 1.3rem;
+}
+button{
+  background-color: hsl(0, 0%, 5%);
+  color: hsl(0, 0%, 95%);
+  border: solid 1vw hsl(0, 0%, 95%);
+  padding: 2vw;
+  font-size: 1.2rem;
+  font-weight: 550;
+  border-radius: 16vw;
+  transition: scale 0.15s, opacity 0.15s;
+}
+.resultphoto{
+  width: 8vw;
+}
+button:hover{
+  scale: 1.05;
+}
+button:active{
+  opacity: 0.8;
+}
